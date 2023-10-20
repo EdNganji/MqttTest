@@ -15,10 +15,10 @@ public PahoTest001Producer() {
 }
 
 public static void main(String[] args) {
-    new PahoTest001Producer().doDemo();
+    new PahoTest001Producer().doDemo("Bonjour");
 }
 
-public void doDemo() {
+public void doDemo(String valeur) {
     try {
         String uri = "tcp://test.mosquitto.org:1883";
         String clientID = UUID.randomUUID().toString();
@@ -31,7 +31,7 @@ public void doDemo() {
         client.setCallback(this);
 
         MqttMessage message = new MqttMessage();
-        message.setPayload("Bonjour".getBytes());
+        message.setPayload(valeur.getBytes());
         System.out.println("*** msgId = "+message.getId());
         client.publish("foo", message);
 
